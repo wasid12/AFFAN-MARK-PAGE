@@ -9,21 +9,15 @@ OWNER_NAME = "AFFAN MARK"
 TOOL_NAME = "ULTRA HEAVY CLONER"
 FIXED_PASSWORD = "AFFANMARK376"
 
+# Background Image URL (Jo tumne di thi)
+BG_IMAGE = "https://images.clothes.com/1000086890.jpg" 
+
 # --- DATA LIST ---
 MY_OLD_IDS = [
     "100001969555649|12345678", "100001241816244|123456789", "100001474307734|123456789",
     "100001231429391|123456", "100001420901985|123456", "100001499197000|123456789",
-    "100001236273909|123456", "100001500570887|123456789", "100001254576308|123456",
-    "100001188137040|123456", "100001306141710|123456", "100001875667664|1234567"
+    "100001236273909|123456", "100001500570887|123456789", "100001254576308|123456"
 ]
-
-def generate_heavy_cookie():
-    chars = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-    datr = "".join(random.choice(chars) for _ in range(24))
-    sb = "".join(random.choice(chars) for _ in range(24))
-    fake_uid = "6158" + str(random.randint(1111111111, 9999999999))
-    xs_val = f"{random.randint(40, 50)}%3A{''.join(random.choice(chars) for _ in range(14))}%3A2%3A{random.randint(1770000000, 1780000000)}"
-    return f"datr={datr};sb={sb};c_user={fake_uid};xs={xs_val};"
 
 # --- HTML UI ---
 HTML_UI = f"""
@@ -33,67 +27,106 @@ HTML_UI = f"""
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{OWNER_NAME} TOOL</title>
     <style>
-        body {{ background: #000; color: #0f0; font-family: monospace; text-align: center; padding: 10px; }}
-        .header {{ border: 1px solid #0f0; padding: 10px; margin-bottom: 20px; font-size: 12px; white-space: pre; }}
-        .form-box {{ border: 1px solid #fff; padding: 20px; max-width: 400px; margin: auto; }}
-        input, select, button {{ width: 100%; padding: 12px; margin: 10px 0; background: #000; color: #0f0; border: 1px solid #0f0; box-sizing: border-box; }}
-        button {{ background: #0f0; color: #000; font-weight: bold; cursor: pointer; }}
-        .result-item {{ border-bottom: 1px dashed #0f0; padding: 10px; text-align: left; font-size: 12px; margin-top: 10px; }}
+        body {{ 
+            background: url('{BG_IMAGE}') no-repeat center center fixed; 
+            background-size: cover;
+            color: #0f0; 
+            font-family: monospace; 
+            text-align: center; 
+            padding: 10px;
+            margin: 0;
+        }}
+        .overlay {{ background: rgba(0, 0, 0, 0.7); min-height: 100vh; padding: 20px 10px; }}
+        .header {{ border: 1px solid #0f0; padding: 15px; margin-bottom: 20px; font-size: 14px; background: rgba(0,0,0,0.8); }}
+        .banner-text {{ font-size: 30px; font-weight: bold; color: #0f0; margin-bottom: 5px; letter-spacing: 5px; }}
+        .form-box {{ border: 1px solid #fff; padding: 15px; max-width: 450px; margin: auto; background: rgba(0,0,0,0.9); }}
+        
+        input {{ width: 100%; padding: 12px; margin-bottom: 15px; background: #000; color: #0f0; border: 1px solid #0f0; box-sizing: border-box; }}
+        
+        .method-row {{ display: flex; align-items: center; justify-content: space-between; border: 1px solid #444; margin-bottom: 8px; background: #000; }}
+        .method-name {{ padding: 10px; font-size: 13px; color: #0f0; text-align: left; flex: 1; }}
+        .btn-next {{ background: #0f0; color: #000; border: none; padding: 10px 20px; font-weight: bold; cursor: pointer; min-width: 80px; }}
+        .btn-exit {{ background: #f00; color: #fff; border: none; padding: 10px 20px; font-weight: bold; cursor: pointer; min-width: 80px; }}
+        
+        #start-btn {{ width: 100%; padding: 15px; background: #0f0; color: #000; font-weight: bold; border: none; margin-top: 15px; cursor: pointer; font-size: 16px; }}
+        .result-item {{ border: 1px solid #0f0; padding: 10px; font-size: 14px; margin-top: 10px; background: rgba(0, 30, 0, 0.9); text-align: left; }}
     </style>
 </head>
 <body>
+<div class="overlay">
     <div class="header">
-  █████  ██   ██ ███    ██ 
- ██   ██ ██   ██ ████   ██ 
- ███████ ██   ██ ██ ██  ██ 
- ██   ██  ██ ██  ██  ██ ██ 
- ██   ██   ███   ██   ████ 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- AUTHOR : {OWNER_NAME}
- TOOL   : {TOOL_NAME}
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        <div class="banner-text">AFFAN</div>
+        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━<br>
+        AUTHOR : {OWNER_NAME}<br>
+        TOOL   : {TOOL_NAME}<br>
+        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     </div>
 
     <div class="form-box">
         <input type="password" id="pass" placeholder="ENTER PASSWORD">
-        <select id="method">
-            <option value="MIXED">METHOD MIXED</option>
-            <option value="2009">METHOD 2009</option>
-            <option value="2010">METHOD 2010</option>
-        </select>
-        <button onclick="runTool()">START CLONING</button>
+        
+        <div class="method-row">
+            <div class="method-name">(1) OLD CLONING</div>
+            <button class="btn-next" onclick="setMethod('OLD CLONING')">NEXT</button>
+        </div>
+        <div class="method-row">
+            <div class="method-name">(2) 2014 CLONING</div>
+            <button class="btn-next" onclick="setMethod('2014 CLONING')">NEXT</button>
+        </div>
+        <div class="method-row">
+            <div class="method-name">(3) 2009 CLONING</div>
+            <button class="btn-next" onclick="setMethod('2009 CLONING')">NEXT</button>
+        </div>
+        <div class="method-row">
+            <div class="method-name">(4) EXIT</div>
+            <button class="btn-exit" onclick="window.close()">EXIT</button>
+        </div>
+
+        <input type="hidden" id="selected_method" value="OLD CLONING">
+        <button id="start-btn" onclick="runTool()">START CLONING</button>
     </div>
 
+    <div id="status" style="margin-top: 15px; font-weight: bold; color: yellow;"></div>
     <div id="logs"></div>
+</div>
 
-    <script>
-        function runTool() {{
-            const p = document.getElementById('pass').value;
-            const m = document.getElementById('method').value;
-            const logBox = document.getElementById('logs');
+<script>
+    function setMethod(m) {{
+        document.getElementById('selected_method').value = m;
+        document.getElementById('status').innerHTML = "[*] Selected: " + m;
+    }}
 
-            if(p !== "{FIXED_PASSWORD}") {{ alert("Wrong Password!"); return; }}
+    function runTool() {{
+        const p = document.getElementById('pass').value;
+        const m = document.getElementById('selected_method').value;
+        const logBox = document.getElementById('logs');
+        const statusBox = document.getElementById('status');
 
-            logBox.innerHTML = "<p style='color:yellow'>[*] Extracting IDs...</p>" + logBox.innerHTML;
-
-            fetch('/api/crack', {{
-                method: 'POST',
-                headers: {{'Content-Type': 'application/x-www-form-urlencoded'}},
-                body: `method=${{m}}`
-            }})
-            .then(res => res.json())
-            .then(data => {{
-                let html = `
-                    <div class="result-item">
-                        <span style="color:#0f0">[AVN-OK]</span> ${{data.id_data}}<br>
-                        <span style="color:yellow">YEAR:</span> ${{data.year}}<br>
-                        <span style="color:#fff">COOKIE:</span> ${{data.cookie}}
-                    </div>
-                `;
-                logBox.innerHTML = html + logBox.innerHTML;
-            }});
+        if(p !== "{FIXED_PASSWORD}") {{ 
+            alert("WRONG PASSWORD!"); 
+            return; 
         }}
-    </script>
+
+        statusBox.innerHTML = "[*] Extracting IDs...";
+
+        fetch('/api/crack', {{
+            method: 'POST',
+            headers: {{'Content-Type': 'application/x-www-form-urlencoded'}},
+            body: `method=${{m}}`
+        }})
+        .then(res => res.json())
+        .then(data => {{
+            statusBox.innerHTML = "<span style='color:#0f0'>[✓] ID SUCCESS!</span>";
+            let html = `
+                <div class="result-item">
+                    <b style="color:#0f0">[AFFAN-OK]</b> ${{data.id_data}}<br>
+                    <b style="color:yellow">METHOD:</b> ${{data.year}}
+                </div>
+            `;
+            logBox.innerHTML = html + logBox.innerHTML;
+        }});
+    }}
+</script>
 </body>
 </html>
 """
@@ -106,9 +139,7 @@ def home():
 def crack_api():
     method = request.form.get('method')
     id_data = random.choice(MY_OLD_IDS)
-    year = method if method != "MIXED" else random.choice(["2009", "2010", "2011"])
-    cookie = generate_heavy_cookie()
-    return jsonify({{"id_data": id_data, "year": year, "cookie": cookie}})
+    return jsonify({"id_data": id_data, "year": method})
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
